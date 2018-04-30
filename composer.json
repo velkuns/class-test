@@ -1,0 +1,18 @@
+{
+    "name": "c-malet/class-test",
+    "description": "PHP Class testing",
+    "keywords":     ["PHPUnit", "Prophecy", "Test", "Mock"],
+    "homepage":     "https://github.com/c-malet/class-test",
+    "type":         "library",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name": "Clement Malet",
+            "email": "malet.pro@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.3|^7.0",
+        "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
+    }
+}
