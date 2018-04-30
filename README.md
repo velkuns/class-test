@@ -42,6 +42,10 @@ class TestSomeClass extends ClassTestCase {
 
 Requires PHP 5.3.3 or greater and PHPUnit ^4.8.35 or greater
 
+#### Composer
+
+Run composer command `composer require c-malet/class-test`
+
 ## Usage
 
 #### Test set up
@@ -71,8 +75,8 @@ public function getTestedClassConstructorParameters() {
         // If you want to provide several instances of the same class,
         // or if you want to force a key to retrieve mocks later on, 
         // simply specify a key
-        'Logger1 => LoggerInterface::class, 
-        'Logger2 => LoggerInterface::class,
+        'Logger1' => LoggerInterface::class, 
+        'Logger2' => LoggerInterface::class,
         
         // string, integer, array, ... can still be used directly
         'someString',
