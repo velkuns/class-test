@@ -155,7 +155,7 @@ class TestPizzaCooker extends ClassTestCase {
         );
 
         // Folder should fold the previously baked pizza 
-        $this->getProphecyMethod(FolderInterface::class, 'fold')->with([$pizza->reveal]);
+        $this->getProphecyMethod(FolderInterface::class, 'fold')->with([$pizza->reveal()]);
 
         $pizzaCooker = $this->getTestedClass();
         $pizzaCooker->cookPizza('calzone')
