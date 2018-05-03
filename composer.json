@@ -11,6 +11,11 @@
             "email": "malet.pro@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "ClassTest": "src/"
+        }
+    },
     "require": {
         "php": "^5.3|^7.0",
         "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"

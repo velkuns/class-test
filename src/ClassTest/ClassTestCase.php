@@ -1,8 +1,7 @@
 <?php
 
-namespace CMalet\ClassTest;
+namespace ClassTest\ClassTest;
 
-use ClassTest\ClassTest\AbstractTestCase;
 use ClassTest\Exception\NotProphesizableException;
 use ClassTest\TestTools;
 use Prophecy\Prophecy\ObjectProphecy;
