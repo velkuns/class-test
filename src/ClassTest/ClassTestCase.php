@@ -71,7 +71,7 @@ abstract class ClassTestCase extends AbstractTestCase
             try {
                 TestTools::assertIsProphesizable($parameter);
 
-                $prophecy = $this->prophesize($parameter);
+                $prophecy = $this->prophesize($parameter, AbstractTestCase::DUMMY_PROPHECY);
                 $this->addMock($prophecy, $parameter);
                 $parameters[] = $prophecy->reveal();
             } catch (NotProphesizableException $exception) {
@@ -80,7 +80,7 @@ abstract class ClassTestCase extends AbstractTestCase
             }
         }
 
-        $testedClass = $this->getTestedClass();
+        $testedClass = $this->getTestedClassName();
         $this->testedClass = new $testedClass(...$parameters);
     }
 

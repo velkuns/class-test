@@ -80,7 +80,10 @@ abstract class AbstractTestCase extends TestCase
      */
     protected function prophesizeDummy($class = null)
     {
-        return $this->prophesize($class, self::DUMMY_PROPHECY);
+        $prophecy = parent::prophesize($class);
+        TestTools::setDummyProphecy($prophecy, $class);
+
+        return $prophecy;
     }
 
     /**
