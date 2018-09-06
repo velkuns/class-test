@@ -93,7 +93,7 @@ class TestTools
         foreach ($reflectionClass->getMethods() as $method) {
             $methodName = $method->getName();
 
-            if (strpos('__', $methodName) === 0) {
+            if (strpos($methodName, '__') === 0) {
                 continue;
             }
 
