@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\ClassTest;
 
@@ -14,7 +14,7 @@ use Tests\ClassTest\TestClasses\SomeInterface;
  */
 class ClassTestCaseTest extends TestCase
 {
-    public function testTestedClassInstantiation()
+    public function testTestedClassInstantiation(): void
     {
         $mockClassTestCase = $this->getMockBuilder(SomeClassTestCase::class)
             ->disableOriginalConstructor()

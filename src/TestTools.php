@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace ClassTest;
 
@@ -20,29 +20,31 @@ class TestTools
      * Allow to test a protected (or private) method, even if it is not meant to be possible
      * by PHPUnit
      *
-     * @param $object
-     * @param $method
-     * @param $args
+     * @param object $object
+     * @param string $method
+     * @param array $args
      * @return mixed
      * @throws \ReflectionException
      */
-    public static function callProtectedMethod($object, $method, $args)
+    public static function callProtectedMethod($object, string $method, array $args)
     {
         $class = new \ReflectionClass(get_class($object));
         $method = $class->getMethod($method);
         $method->setAccessible(true);
+
         return $method->invokeArgs($object, $args);
     }
 
     /**
      * Allow to force a protected (or private) property, even if it is not meant to be possible
      *
-     * @param $object
-     * @param $property
-     * @param $value
+     * @param object $object
+     * @param string $property
+     * @param mixed $value
+     * @return void
      * @throws \ReflectionException
      */
-    public static function setProtectedProperty($object, $property, $value)
+    public static function setProtectedProperty($object, string $property, $value)
     {
         $property = new \ReflectionProperty(get_class($object), $property);
         $property->setAccessible(true);
@@ -55,13 +57,17 @@ class TestTools
      * with the basic usage of Prophecy, and so avoid potential method may not exist warnings)
      *
      * @param ObjectProphecy $prophecy
-     * @param                $methodName
+     * @param string $methodName
      * @param array|null $arguments
-     * @param                $return
-     * @return MethodProphecy
+     * @param null $return
+     * @return mixed|MethodProphecy
      */
-    public static function getProphecyMethod(ObjectProphecy $prophecy, $methodName, $arguments = null, $return = null)
-    {
+    public static function getProphecyMethod(
+        ObjectProphecy $prophecy,
+        string $methodName,
+        ?array $arguments = null,
+        $return = null
+    ): MethodProphecy {
         if ($arguments === null) {
             $arguments = Argument::cetera();
         }
@@ -76,7 +82,8 @@ class TestTools
         }
 
         $methodProphecy->withArguments(new Argument\ArgumentsWildcard([$arguments]))
-            ->willReturn($return);
+            ->willReturn($return)
+        ;
 
         return $methodProphecy;
     }
@@ -85,9 +92,11 @@ class TestTools
      * Sets methods of a prophecy dummy so that they accept any arguments, and always return null
      *
      * @param ObjectProphecy $prophecy
-     * @param                $prophecyName
+     * @param string $prophecyName
+     * @return void
+     * @throws \ReflectionException
      */
-    public static function setDummyProphecy(ObjectProphecy $prophecy, $prophecyName)
+    public static function setDummyProphecy(ObjectProphecy $prophecy, string $prophecyName): void
     {
         $reflectionClass = new \ReflectionClass($prophecyName);
         foreach ($reflectionClass->getMethods() as $method) {
@@ -102,13 +111,15 @@ class TestTools
     }
 
     /**
-     * @param $prophesizedObject
+     * @param object $prophesizedObject
      * @throws \InvalidArgumentException
      */
     public static function assertIsObjectProphecy($prophesizedObject)
     {
         if (($prophesizedObject instanceof ObjectProphecy) === false) {
-            throw new \InvalidArgumentException('Expecting array of ObjectProphecy, got an instance of ' . get_class($prophesizedObject) . ' instead.');
+            throw new \InvalidArgumentException(
+                'Expecting array of ObjectProphecy, got an instance of ' . get_class($prophesizedObject) . ' instead.'
+            );
         }
     }
 
@@ -116,7 +127,7 @@ class TestTools
      * "Assert" that a given class name is prophesizable in the sense that a prophesize call would result
      * on a random null Prophecy
      *
-     * @param $className
+     * @param mixed $className
      * @throws NotProphesizableException
      */
     public static function assertIsProphesizable($className)
