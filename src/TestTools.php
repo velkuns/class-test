@@ -75,8 +75,10 @@ class TestTools
             $methodProphecy = array_shift($methodProphecies);
         }
 
-        $methodProphecy->withArguments(new Argument\ArgumentsWildcard([$arguments]))
-            ->willReturn($return);
+        $methodProphecy->withArguments(new Argument\ArgumentsWildcard([$arguments]);
+        if (!$methodProphecy->hasReturnVoid()) {
+            $methodProphecy->willReturn($return);
+        }
 
         return $methodProphecy;
     }
@@ -86,6 +88,7 @@ class TestTools
      *
      * @param ObjectProphecy $prophecy
      * @param                $prophecyName
+     * @throws
      */
     public static function setDummyProphecy(ObjectProphecy $prophecy, $prophecyName)
     {
