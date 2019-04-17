@@ -75,7 +75,7 @@ class TestTools
             $methodProphecy = array_shift($methodProphecies);
         }
 
-        $methodProphecy->withArguments(new Argument\ArgumentsWildcard([$arguments]);
+        $methodProphecy->withArguments(new Argument\ArgumentsWildcard([$arguments]));
         if (!$methodProphecy->hasReturnVoid()) {
             $methodProphecy->willReturn($return);
         }
