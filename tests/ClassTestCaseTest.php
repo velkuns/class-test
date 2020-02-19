@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\ClassTest;
 
@@ -40,7 +42,7 @@ class ClassTestCaseTest extends TestCase
         $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->interface);
         $this->assertInstanceOf(SomeInterface::class, $testedClass->sameInterface);
         $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->sameInterface);
-        $this->assertNotEquals($testedClass->interface, $testedClass->sameInterface);
+        $this->assertEquals($testedClass->interface, $testedClass->sameInterface);
         $this->assertEquals(['someArray', 'withValues'], $testedClass->array);
         $this->assertEquals('a string', $testedClass->someString);
         $this->assertEquals(SomeInterface::class, $testedClass->someStringClass);
