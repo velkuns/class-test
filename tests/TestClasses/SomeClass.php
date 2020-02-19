@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\ClassTest\TestClasses;
 
@@ -17,8 +17,8 @@ class SomeClass
         SomeInterface $interface,
         SomeInterface $sameInterface,
         array $array,
-        $someString,
-        $someStringClass
+        string $someString,
+        string $someStringClass
     ) {
         $this->interface = $interface;
         $this->sameInterface = $sameInterface;
