@@ -61,7 +61,7 @@ class TestTools
      * @param ObjectProphecy $prophecy
      * @param string $methodName
      * @param array|null $arguments
-     * @param null $return
+     * @param mixed|null $return
      * @return mixed|MethodProphecy
      */
     public static function getProphecyMethod(
@@ -109,7 +109,7 @@ class TestTools
                 continue;
             }
 
-            self::getProphecyMethod($prophecy, $methodName, null, null);
+            self::getProphecyMethod($prophecy, $methodName);
         }
     }
 

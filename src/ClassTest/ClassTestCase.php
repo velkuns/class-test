@@ -19,7 +19,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 abstract class ClassTestCase extends AbstractTestCase
 {
     /**
-     * Used to indicate that a class parameter is a string, and not a class to Prophecyze
+     * Used to indicate that a class parameter is a string, and not a class to Prophesize
      * Useful when a parameter matches a class name
      *
      * How to use it :
@@ -53,6 +53,8 @@ abstract class ClassTestCase extends AbstractTestCase
      *  - A mock object, if so this mock is given to the class constructor, and the mock can be accessed with
      *    the getMockedParameter with the key of the value in the given array
      *  - Anything else, directly given as such to the class constructor
+     *
+     * @throws \ReflectionException
      */
     public function setUp(): void
     {

@@ -16,6 +16,10 @@ use Tests\ClassTest\TestClasses\SomeInterface;
  */
 class ClassTestCaseTest extends TestCase
 {
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
     public function testTestedClassInstantiation(): void
     {
         $mockClassTestCase = $this->getMockBuilder(SomeClassTestCase::class)

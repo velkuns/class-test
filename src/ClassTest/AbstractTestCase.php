@@ -34,6 +34,7 @@ abstract class AbstractTestCase extends TestCase
      * @param string $mockName
      * @param bool $createIfNotFound
      * @return ObjectProphecy
+     * @throws \ReflectionException
      */
     protected function getProphecy(string $mockName, bool $createIfNotFound = false): ProphecyInterface
     {
@@ -55,6 +56,7 @@ abstract class AbstractTestCase extends TestCase
      * @param string $methodName
      * @param array|null $arguments
      * @return MethodProphecy
+     * @throws \ReflectionException
      */
     protected function getProphecyMethod(
         string $prophecyName,
@@ -70,14 +72,15 @@ abstract class AbstractTestCase extends TestCase
      *
      * Methods behavior can still be changed later on, though.
      *
-     * @param string $class
+     * @param string $classOrInterface
      * @param int $prophecyDummyType
      * @return ObjectProphecy
+     * @throws \ReflectionException
      */
-    protected function prophesize($class = null, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
+    protected function prophesize($classOrInterface = null, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
     {
-        return $prophecyDummyType === self::DUMMY_PROPHECY ? parent::prophesize($class) : $this->prophesizeDummy(
-            $class
+        return $prophecyDummyType === self::DUMMY_PROPHECY ? parent::prophesize($classOrInterface) : $this->prophesizeDummy(
+            $classOrInterface
         );
     }
 
@@ -86,6 +89,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @param string|null $class
      * @return ObjectProphecy
+     * @throws \ReflectionException
      * @see prophesize
      */
     protected function prophesizeDummy(?string $class = null): ObjectProphecy
@@ -131,6 +135,7 @@ abstract class AbstractTestCase extends TestCase
      * @param string $mockClassName
      * @param string|null $mockName
      * @return ObjectProphecy
+     * @throws \ReflectionException
      */
     protected function addNewStub(string $mockClassName, ?string $mockName = null): ObjectProphecy
     {
@@ -148,6 +153,7 @@ abstract class AbstractTestCase extends TestCase
      * @param string $dummyClassName
      * @param string|null $dummyName
      * @return ObjectProphecy
+     * @throws \ReflectionException
      */
     protected function addNewDummy(string $dummyClassName, ?string $dummyName = null): ObjectProphecy
     {
