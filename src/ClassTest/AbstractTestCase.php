@@ -39,7 +39,7 @@ abstract class AbstractTestCase extends TestCase
     protected function getProphecy(string $mockName, bool $createIfNotFound = false): ProphecyInterface
     {
         if (isset($this->mocks[$mockName])) {
-            $this->mocks[$mockName];
+            return $this->mocks[$mockName];
         }
 
         if ($createIfNotFound) {
