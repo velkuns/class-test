@@ -46,7 +46,7 @@ class TestTools
      * @return void
      * @throws \ReflectionException
      */
-    public static function setProtectedProperty($object, string $property, $value)
+    public static function setProtectedProperty($object, string $property, $value): void
     {
         $property = new \ReflectionProperty(get_class($object), $property);
         $property->setAccessible(true);
@@ -117,7 +117,7 @@ class TestTools
      * @param object $prophesizedObject
      * @throws \InvalidArgumentException
      */
-    public static function assertIsObjectProphecy($prophesizedObject)
+    public static function assertIsObjectProphecy($prophesizedObject): void
     {
         if (($prophesizedObject instanceof ObjectProphecy) === false) {
             throw new \InvalidArgumentException(
@@ -133,7 +133,7 @@ class TestTools
      * @param mixed $className
      * @throws NotProphesizableException
      */
-    public static function assertIsProphesizable($className)
+    public static function assertIsProphesizable($className): void
     {
         if (!is_string($className)) {
             throw new NotProphesizableException();
