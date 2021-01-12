@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ClassTest\Exception;
 
 /**
@@ -9,5 +11,4 @@ namespace ClassTest\Exception;
  */
 class ProphesizedObjectNotFoundException extends \RuntimeException
 {
-
 }

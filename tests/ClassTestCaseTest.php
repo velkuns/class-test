@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ClassTest;
 
 use ClassTest\ClassTest\ClassTestCase;
@@ -14,7 +16,11 @@ use Tests\ClassTest\TestClasses\SomeInterface;
  */
 class ClassTestCaseTest extends TestCase
 {
-    public function testTestedClassInstantiation()
+    /**
+     * @return void
+     * @throws \ReflectionException
+     */
+    public function testTestedClassInstantiation(): void
     {
         $mockClassTestCase = $this->getMockBuilder(SomeClassTestCase::class)
             ->disableOriginalConstructor()
@@ -40,7 +46,7 @@ class ClassTestCaseTest extends TestCase
         $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->interface);
         $this->assertInstanceOf(SomeInterface::class, $testedClass->sameInterface);
         $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->sameInterface);
-        $this->assertNotEquals($testedClass->interface, $testedClass->sameInterface);
+        $this->assertEquals($testedClass->interface, $testedClass->sameInterface);
         $this->assertEquals(['someArray', 'withValues'], $testedClass->array);
         $this->assertEquals('a string', $testedClass->someString);
         $this->assertEquals(SomeInterface::class, $testedClass->someStringClass);

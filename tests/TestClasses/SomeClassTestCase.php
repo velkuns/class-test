@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\ClassTest\TestClasses;
 
 use ClassTest\ClassTest\ClassTestCase;
@@ -9,13 +11,13 @@ use ClassTest\ClassTest\ClassTestCase;
  */
 class SomeClassTestCase extends ClassTestCase
 {
-    protected function getTestedClassName()
+    protected function getTestedClassName(): string
     {
         // Override in mock
         return '';
     }
 
-    protected function getTestedClassConstructorParameters()
+    protected function getTestedClassConstructorParameters(): array
     {
         // Override in mock
         return [];
