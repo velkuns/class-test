@@ -24,7 +24,7 @@ class ClassTestCaseTest extends TestCase
     {
         $mockClassTestCase = $this->getMockBuilder(SomeClassTestCase::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getTestedClassName', 'getTestedClassConstructorParameters'])
+            ->onlyMethods(['getTestedClassName', 'getTestedClassConstructorParameters'])
             ->getMock();
 
         $mockClassTestCase->method('getTestedClassName')->willReturn(SomeClass::class);
