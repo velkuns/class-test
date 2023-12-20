@@ -1,0 +1,21 @@
+includes:
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+
+parameters:
+  phpVersion: 80100 # PHP 8.1 - Current minimal version supported
+  level: max
+  paths:
+    - ./src
+    - ./tests
+
+  bootstrapFiles:
+    - ./vendor/autoload.php
+
+  ignoreErrors:
+    -
+      path:    'tests/TestClasses/SomeClassTestCase.php'
+      message: '`Method ClassTest\\Tests\\TestClasses\\SomeClassTestCase::getTestedClassName\(\) should return class-string<T of object> but returns string`'
+    -
+      path:    'src/TestTools.php'
+      message: '`Dead catch - ReflectionException is never thrown in the try block`'

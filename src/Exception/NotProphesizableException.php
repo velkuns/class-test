@@ -9,6 +9,4 @@ namespace ClassTest\Exception;
  *
  * @author Clement Malet
  */
-class NotProphesizableException extends \RuntimeException
-{
-}
+class NotProphesizableException extends \RuntimeException {}

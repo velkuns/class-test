@@ -2,30 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Tests\ClassTest\TestClasses;
+namespace ClassTest\Tests\TestClasses;
 
 /**
  * Class SomeClass
  */
 class SomeClass
 {
-    public $interface;
-    public $sameInterface;
-    public $array;
-    public $someString;
-    public $someStringClass;
-
+    /**
+     * @param array<mixed> $array
+     */
     public function __construct(
-        SomeInterface $interface,
-        SomeInterface $sameInterface,
-        array $array,
-        string $someString,
-        string $someStringClass
-    ) {
-        $this->interface = $interface;
-        $this->sameInterface = $sameInterface;
-        $this->array = $array;
-        $this->someString = $someString;
-        $this->someStringClass = $someStringClass;
-    }
+        public readonly SomeInterface $interface,
+        public readonly SomeInterface $sameInterface,
+        public readonly array $array,
+        public readonly string $someString,
+        public readonly string $someStringClass
+    ) {}
 }
