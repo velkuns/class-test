@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\ClassTest\TestClasses;
+namespace ClassTest\Tests\TestClasses;
 
-use ClassTest\ClassTest\ClassTestCase;
+use ClassTest\ClassTestCase;
 
 /**
  * Class SomeClassTestCase
+ *
+ * @template T of object
+ * @extends ClassTestCase<T>
  */
 class SomeClassTestCase extends ClassTestCase
 {
@@ -17,14 +20,12 @@ class SomeClassTestCase extends ClassTestCase
         return '';
     }
 
+    /**
+     * @return array<mixed>
+     */
     protected function getTestedClassConstructorParameters(): array
     {
         // Override in mock
         return [];
-    }
-
-    public function getTestedClass()
-    {
-        return parent::getTestedClass();
     }
 }

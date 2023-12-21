@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace ClassTest\ClassTest;
+namespace ClassTest;
 
 use ClassTest\Exception\ProphesizedObjectNotFoundException;
-use ClassTest\TestTools;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\MethodProphecy;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecyInterface;
 
 /**
  * Class AbstractTestCase
  *
  * @author Clement Malet
+ *
+ * @template T of object
  */
 abstract class AbstractTestCase extends TestCase
 {
@@ -23,25 +23,24 @@ abstract class AbstractTestCase extends TestCase
         prophesize as parentProphesize;
     }
 
-    const DEFAULT_PROPHECY = 0;
-
-    const DUMMY_PROPHECY   = 1;
+    public const DEFAULT_PROPHECY = 0;
+    public const DUMMY_PROPHECY = 1;
 
     /**
      * Every ObjectProphecy is considered to be a mock here
      * The 'Dummy' keyword is only used to instantiate what we will then consider a mock
      *
-     * @var ObjectProphecy[] $mocks
+     * @var ObjectProphecy<T>[] $mocks
      */
-    private $mocks = [];
+    private array $mocks = [];
 
     /**
-     * @param string $mockName
+     * @param class-string<T> $mockName
      * @param bool $createIfNotFound
-     * @return ObjectProphecy
+     * @return ObjectProphecy<T>
      * @throws \ReflectionException
      */
-    protected function getProphecy(string $mockName, bool $createIfNotFound = false): ProphecyInterface
+    protected function getProphecy(string $mockName, bool $createIfNotFound = false): ObjectProphecy
     {
         if (isset($this->mocks[$mockName])) {
             return $this->mocks[$mockName];
@@ -57,16 +56,16 @@ abstract class AbstractTestCase extends TestCase
     }
 
     /**
-     * @param string $prophecyName
+     * @param class-string<T> $prophecyName
      * @param string $methodName
-     * @param array|null $arguments
+     * @param array<mixed>|null $arguments
      * @return MethodProphecy
      * @throws \ReflectionException
      */
     protected function getProphecyMethod(
         string $prophecyName,
         string $methodName,
-        ?array $arguments = null
+        array|null $arguments = null
     ): MethodProphecy {
         return TestTools::getProphecyMethod($this->getProphecy($prophecyName), $methodName, $arguments);
     }
@@ -77,27 +76,27 @@ abstract class AbstractTestCase extends TestCase
      *
      * Methods behavior can still be changed later on, though.
      *
-     * @param string|null $classOrInterface
+     * @param class-string<T> $class
      * @param int $prophecyDummyType
-     * @return ObjectProphecy
+     * @return ObjectProphecy<T>
      * @throws \ReflectionException
      */
-    protected function prophesize(?string $classOrInterface = null, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
+    protected function prophesize(string $class, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
     {
-        return $prophecyDummyType === self::DUMMY_PROPHECY ? $this->parentProphesize($classOrInterface) : $this->prophesizeDummy(
-            $classOrInterface
-        );
+        return $prophecyDummyType === self::DUMMY_PROPHECY
+            ? $this->parentProphesize($class)
+            : $this->prophesizeDummy($class);
     }
 
     /**
      * Initiate a dummy with "void" methods, allowing all methods to take any arguments and to return null.
      *
-     * @param string|null $class
-     * @return ObjectProphecy
+     * @param class-string<T> $class
+     * @return ObjectProphecy<T>
      * @throws \ReflectionException
      * @see prophesize
      */
-    protected function prophesizeDummy(?string $class = null): ObjectProphecy
+    protected function prophesizeDummy(string $class): ObjectProphecy
     {
         $prophecy = $this->parentProphesize($class);
         TestTools::setDummyProphecy($prophecy, $class);
@@ -106,17 +105,17 @@ abstract class AbstractTestCase extends TestCase
     }
 
     /**
-     * @return ObjectProphecy[]
+     * @return ObjectProphecy<T>[]
      */
-    protected function getMocks(): iterable
+    protected function getMocks(): array
     {
         return $this->mocks;
     }
 
     /**
-     * @param ObjectProphecy[] $mocks
+     * @param ObjectProphecy<T>[] $mocks
      */
-    protected function setMocks(iterable $mocks): void
+    protected function setMocks(array $mocks): void
     {
         foreach ($mocks as $name => $mock) {
             $this->addMock($mock, $name);
@@ -126,8 +125,8 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Adds a mock object to the mocks collection
      *
-     * @param ObjectProphecy $mock
-     * @param string $keyName
+     * @param ObjectProphecy<T> $mock
+     * @param string         $keyName
      */
     protected function addMock(ObjectProphecy $mock, string $keyName): void
     {
@@ -137,12 +136,12 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Adds a mock from a class name, then returns it
      *
-     * @param string $mockClassName
+     * @param class-string<T> $mockClassName
      * @param string|null $mockName
-     * @return ObjectProphecy
+     * @return ObjectProphecy<T>
      * @throws \ReflectionException
      */
-    protected function addNewStub(string $mockClassName, ?string $mockName = null): ObjectProphecy
+    protected function addNewStub(string $mockClassName, string|null $mockName = null): ObjectProphecy
     {
         TestTools::assertIsProphesizable($mockClassName);
         $mock = $this->prophesize($mockClassName);
@@ -155,12 +154,12 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Adds a dummy from a class name
      *
-     * @param string $dummyClassName
+     * @param class-string<T> $dummyClassName
      * @param string|null $dummyName
-     * @return ObjectProphecy
+     * @return ObjectProphecy<T>
      * @throws \ReflectionException
      */
-    protected function addNewDummy(string $dummyClassName, ?string $dummyName = null): ObjectProphecy
+    protected function addNewDummy(string $dummyClassName, string|null $dummyName = null): ObjectProphecy
     {
         TestTools::assertIsProphesizable($dummyClassName);
         $dummy = $this->prophesizeDummy($dummyClassName);

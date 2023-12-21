@@ -1,5 +1,9 @@
 # Class test
 
+[![Current version](https://img.shields.io/packagist/v/c-malet/class-test.svg?logo=composer)](https://packagist.org/packages/velkuns/pipeline)
+[![Supported PHP version](https://img.shields.io/static/v1?logo=php&label=PHP&message=^8.1&color=777bb4)](https://packagist.org/packages/c-malet/class-test)
+![CI](https://github.com/C-Malet/class-test/workflows/CI/badge.svg)
+
 PHP testing library focused on testing classes mocking all of their constructor parameters, using Prophecy.
 
 The main objective is to make testing a class quicker by automatizing the tested class instantiation with dummy parameters, and retrieve a whole new instance for each test.
@@ -40,7 +44,7 @@ class TestSomeClass extends ClassTestCase {
 
 #### Prerequisites 
 
-Requires PHP 5.3.3 or greater and PHPUnit ^4.8.35 or greater
+Requires PHP 8.1 or greater and PHPUnit ^9.0 || ^10.0
 
 #### Composer
 
@@ -164,4 +168,73 @@ class TestPizzaCooker extends ClassTestCase {
         $this->getProphecy(FolderInterface::class)->bake()->shouldHaveBeenCalled(1);
     }
 }
+```
+
+
+## Contributing
+
+See the [CONTRIBUTING](CONTRIBUTING.md) file.
+
+
+### Install / update project
+
+You can install project with the following command:
+```bash
+make install
+```
+
+And update with the following command:
+```bash
+make update
+```
+
+NB: For the components, the `composer.lock` file is not committed.
+
+### Testing & CI (Continuous Integration)
+
+#### Tests
+You can run unit tests (with coverage) on your side with following command:
+```bash
+make tests
+```
+
+For prettier output (but without coverage), you can use the following command:
+```bash
+make testdox # run tests without coverage reports but with prettified output
+```
+
+#### Code Style
+You also can run code style check with following commands:
+```bash
+make phpcs-check
+```
+
+You also can run code style fixes with following commands:
+```bash
+make phpcs-fix
+```
+
+#### Static Analysis
+To perform a static analyze of your code (with phpstan, lvl 9 at default), you can use the following command:
+```bash
+make phpstan
+```
+
+To ensure you code still compatible with current supported version at Deezer and futures versions of php, you need to
+run the following commands (both are required for full support):
+
+Minimal supported version:
+```bash
+make php81compatibility
+```
+
+Maximal supported version:
+```bash
+make php83compatibility
+```
+
+#### CI Simulation
+And the last "helper" commands, you can run before commit and push, is:
+```bash
+make ci  
 ```

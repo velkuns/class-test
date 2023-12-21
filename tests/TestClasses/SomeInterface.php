@@ -2,12 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\ClassTest\TestClasses;
+namespace ClassTest\Tests\TestClasses;
 
 /**
  * Interface SomeInterface
  */
-interface SomeInterface
-{
-
-}
+interface SomeInterface {}
