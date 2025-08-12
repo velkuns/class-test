@@ -188,6 +188,11 @@ And update with the following command:
 make update
 ```
 
+Check dependencies:
+```bash
+make deps
+```
+
 NB: For the components, the `composer.lock` file is not committed.
 
 ### Testing & CI (Continuous Integration)
@@ -215,9 +220,9 @@ make phpcs-fix
 ```
 
 #### Static Analysis
-To perform a static analyze of your code (with phpstan, lvl 9 at default), you can use the following command:
+To perform a static analyze of your code (with phpstan, lvl max at default), you can use the following command:
 ```bash
-make phpstan
+make analyze
 ```
 
 To ensure you code still compatible with current supported version at Deezer and futures versions of php, you need to
@@ -225,12 +230,12 @@ run the following commands (both are required for full support):
 
 Minimal supported version:
 ```bash
-make php81compatibility
+make phpmin-compatibility
 ```
 
 Maximal supported version:
 ```bash
-make php83compatibility
+make phpmax-compatibility
 ```
 
 #### CI Simulation

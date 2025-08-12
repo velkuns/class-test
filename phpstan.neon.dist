@@ -1,9 +1,10 @@
 includes:
-  - vendor/phpstan/phpstan-phpunit/extension.neon
-  - vendor/phpstan/phpstan-phpunit/rules.neon
+  - ./vendor/phpstan/phpstan-phpunit/extension.neon
+  - ./vendor/phpstan/phpstan-phpunit/rules.neon
+  - ./vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-  phpVersion: 80100 # PHP 8.1 - Current minimal version supported
+  phpVersion: 80300
   level: max
   paths:
     - ./src
@@ -12,6 +13,8 @@ parameters:
   bootstrapFiles:
     - ./vendor/autoload.php
 
+  treatPhpDocTypesAsCertain: false
+
   ignoreErrors:
     -
       path:    'tests/TestClasses/SomeClassTestCase.php'
@@ -19,3 +22,7 @@ parameters:
     -
       path:    'src/TestTools.php'
       message: '`Dead catch - ReflectionException is never thrown in the try block`'
+    -
+      path:       'src/TestTools.php'
+      identifier: 'method.dynamicName'
+      count:      1

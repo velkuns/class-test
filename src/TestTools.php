@@ -67,7 +67,7 @@ class TestTools
         ObjectProphecy $prophecy,
         string|null $methodName,
         array|null $arguments = null,
-        mixed $return = null
+        mixed $return = null,
     ): MethodProphecy {
         if ($arguments === null) {
             $arguments = [Argument::cetera()];
@@ -121,7 +121,7 @@ class TestTools
     {
         if (($prophesizedObject instanceof ObjectProphecy) === false) {
             throw new \InvalidArgumentException(
-                'Expecting array of ObjectProphecy, got an instance of ' . $prophesizedObject::class . ' instead.'
+                'Expecting array of ObjectProphecy, got an instance of ' . $prophesizedObject::class . ' instead.',
             );
         }
     }

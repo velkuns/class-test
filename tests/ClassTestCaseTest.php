@@ -34,7 +34,7 @@ class ClassTestCaseTest extends TestCase
             'sameInterface' => SomeInterface::class,
             ['someArray', 'withValues'],
             'a string',
-            SomeInterface::class => ClassTestCase::STRING_PARAMETER
+            SomeInterface::class => ClassTestCase::STRING_PARAMETER,
         ]);
 
 
@@ -42,13 +42,13 @@ class ClassTestCaseTest extends TestCase
 
         $testedClass = $mockClassTestCase->getTestedClass();
 
-        $this->assertInstanceOf(SomeInterface::class, $testedClass->interface);
-        $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->interface);
-        $this->assertInstanceOf(SomeInterface::class, $testedClass->sameInterface);
-        $this->assertInstanceOf(ProphecySubjectInterface::class, $testedClass->sameInterface);
-        $this->assertNotSame($testedClass->interface, $testedClass->sameInterface);
-        $this->assertEquals(['someArray', 'withValues'], $testedClass->array);
-        $this->assertEquals('a string', $testedClass->someString);
-        $this->assertEquals(SomeInterface::class, $testedClass->someStringClass);
+        self::assertInstanceOf(SomeInterface::class, $testedClass->interface);
+        self::assertInstanceOf(ProphecySubjectInterface::class, $testedClass->interface);
+        self::assertInstanceOf(SomeInterface::class, $testedClass->sameInterface);
+        self::assertInstanceOf(ProphecySubjectInterface::class, $testedClass->sameInterface);
+        self::assertNotSame($testedClass->interface, $testedClass->sameInterface);
+        self::assertEquals(['someArray', 'withValues'], $testedClass->array);
+        self::assertEquals('a string', $testedClass->someString);
+        self::assertEquals(SomeInterface::class, $testedClass->someStringClass);
     }
 }

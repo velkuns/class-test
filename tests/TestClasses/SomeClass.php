@@ -17,6 +17,6 @@ class SomeClass
         public readonly SomeInterface $sameInterface,
         public readonly array $array,
         public readonly string $someString,
-        public readonly string $someStringClass
+        public readonly string $someStringClass,
     ) {}
 }

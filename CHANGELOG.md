@@ -13,8 +13,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 ```
 
+## [5.0.0] - 2025-08
+[5.0.0]:  https://github.com/C-Malet/class-test/compare/4.0.0...5.0.0
+### Added
+- Add support of PHP 8.4
+- Add support of PHPUnit 11 & 12
+### Removed
+- Drop support of PHP 8.1 & 8.2
+- Drop support of PHPUnit 9
+### Changed
+- Update CI configs
+- Fix phpstan errors
+
+--- 
+
 ## [4.0.0] - 2023-12
-[4.0.0]: https://github.com/C-Malet/class-test/compare/4.0.0...3.0.1
+[4.0.0]: https://github.com/C-Malet/class-test/compare/3.0.1...4.0.0
 ### Removed
 - Remove PHPCS
 - Drop support of PHP 7.3, 7.4 & 8.0

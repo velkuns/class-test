@@ -23,8 +23,8 @@ abstract class AbstractTestCase extends TestCase
         prophesize as parentProphesize;
     }
 
-    public const DEFAULT_PROPHECY = 0;
-    public const DUMMY_PROPHECY = 1;
+    public const int DEFAULT_PROPHECY = 0;
+    public const int DUMMY_PROPHECY = 1;
 
     /**
      * Every ObjectProphecy is considered to be a mock here
@@ -65,7 +65,7 @@ abstract class AbstractTestCase extends TestCase
     protected function getProphecyMethod(
         string $prophecyName,
         string $methodName,
-        array|null $arguments = null
+        array|null $arguments = null,
     ): MethodProphecy {
         return TestTools::getProphecyMethod($this->getProphecy($prophecyName), $methodName, $arguments);
     }
@@ -76,16 +76,16 @@ abstract class AbstractTestCase extends TestCase
      *
      * Methods behavior can still be changed later on, though.
      *
-     * @param class-string<T> $class
+     * @param class-string<T> $classOrInterface
      * @param int $prophecyDummyType
      * @return ObjectProphecy<T>
      * @throws \ReflectionException
      */
-    protected function prophesize(string $class, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
+    protected function prophesize(string $classOrInterface, int $prophecyDummyType = self::DEFAULT_PROPHECY): ObjectProphecy
     {
         return $prophecyDummyType === self::DUMMY_PROPHECY
-            ? $this->parentProphesize($class)
-            : $this->prophesizeDummy($class);
+            ? $this->parentProphesize($classOrInterface)
+            : $this->prophesizeDummy($classOrInterface);
     }
 
     /**
